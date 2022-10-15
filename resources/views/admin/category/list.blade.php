@@ -19,9 +19,9 @@
                                     <i class="zmdi zmdi-plus"></i>Add category
                                 </button>
                             </a>
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            {{-- <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                 CSV download
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                     @if(session('successPasswordChange'))
@@ -57,12 +57,12 @@
                     @endif --}}
                     <div class=" d-flex justify-content-between algin-items-center">
                         <div class="card bg-success px-3 py-2 title-1 ">
-                            <h5 class="text-light title-3">SearchKey: <span class="text-dark">{{request('key')}}</span></h5>
+                            <h5 class="text-light">SearchKey: <span class="text-dark">{{Str::lower(request('key'))}}</span></h5>
                             <h5 class="text-light title-3">Total: {{$categories->total()}}</h5>
                         </div>
                         <div class="">
                             <form action="{{route('category#list')}}" method="get" class="d-flex">
-                                <input type="text" class="form-control shadow-sm" name="key" value="{{request('key')}}">
+                                <input type="text" class="form-control shadow-sm" name="key" value="{{request('key')}}" placeholder="Search...">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -91,19 +91,19 @@
                                     <td>{{$cat->created_at->format('j-F-Y')}}</td>
                                     <td>
                                         <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="View">
+                                            <button class="item" title="View">
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button>
-                                            <a href="{{route('category#edit',$cat->id)}}">
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <a href="{{route('category#edit',$cat->id)}}" class="mx-2">
+                                                <button class="item" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                             </a>
                                             <a href="{{route('category#delete',$cat->id)}}">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                            <button class="item" title="Delete">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
-                                        </a>
+                                            </a>
 
                                         </div>
                                     </td>

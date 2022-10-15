@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('description');
             $table->string('image');
             $table->integer('price');
+            $table->string('waiting_time');
             $table->integer('view_count')->default(0);
             $table->timestamps();
         });

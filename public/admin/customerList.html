@@ -121,6 +121,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <button class="btn btn-dark p-2" onclick="change_url()">Click</button>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
@@ -173,16 +174,16 @@
                                 <div class="table-data__tool-left">
                                     <div class="overview-wrap">
                                         <h2 class="title-1">Product List</h2>
-    
+
                                     </div>
                                 </div>
                                 <div class="table-data__tool-right">
                                     <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                         <i class="zmdi zmdi-plus"></i>add item
-                                    </button>  
+                                    </button>
                                     <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                         CSV download
-                                    </button>  
+                                    </button>
                                 </div>
                             </div>
                             <div class="table-responsive table-responsive-data2">
@@ -229,7 +230,7 @@
                                         </tr>
                                         <tr class="spacer"></tr>
                                         <tr class="tr-shadow">
-                                            
+
                                             <td>Lori Lynch</td>
                                             <td>
                                                 <span class="block-email">john@example.com</span>
@@ -259,7 +260,7 @@
                                         </tr>
                                         <tr class="spacer"></tr>
                                         <tr class="tr-shadow">
-                                            
+
                                             <td>Lori Lynch</td>
                                             <td>
                                                 <span class="block-email">lyn@example.com</span>
@@ -289,7 +290,7 @@
                                         </tr>
                                         <tr class="spacer"></tr>
                                         <tr class="tr-shadow">
-                                            
+
                                             <td>Lori Lynch</td>
                                             <td>
                                                 <span class="block-email">doe@example.com</span>
@@ -354,8 +355,15 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    <script>
+        function change_url()
+{
+   window.history.pushState("object or string", "Title", "/www.google.com");
+}
+    </script>
 
 </body>
+
 
 </html>
 <!-- end document-->

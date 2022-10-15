@@ -21,8 +21,7 @@
     <link href="{{asset('admin/vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="{{asset('admin/vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- Vendor CSS-->
     <link href="{{asset('admin/vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('admin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
@@ -49,19 +48,25 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="index.html">
-                                <i class="fas fa-tachometer-alt"></i>Home Page
-                            </a>
-                        </li>
+
                         <li>
-                            <a href="category.html">
+                            <a href="{{route('category#list')}}" class="text-decoration-none">
                                 <i class="fas fa-chart-bar"></i>Category</a>
                         </li>
                         <li>
-                            <a href="customerList.html">
-                                <i class="fas fa-chart-bar"></i>Customers</a>
+                            <a href="{{route('product#list')}}" class="text-decoration-none">
+                                <i class="fas fa-pizza-slice"></i>Products</a>
                         </li>
+                        <li>
+                            <a href="{{route('admin#orderList')}}" class="text-decoration-none">
+                                <i class="fas fa-chart-bar"></i>Order List</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin#userList')}}" class="text-decoration-none">
+                                <i class="fas fa-users"></i>User List</a>
+                        </li>
+
+
                     </ul>
                 </nav>
             </div>
@@ -81,78 +86,76 @@
                                 </button> --}}
                             </form>
                             <div class="header-button">
-                                <div class="noti-wrap">
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-notifications"></i>
-                                        <span class="quantity">3</span>
-                                        <div class="notifi-dropdown js-dropdown">
-                                            <div class="notifi__title">
-                                                <p>You have 3 Notifications</p>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c1 img-cir img-40">
-                                                    <i class="zmdi zmdi-email-open"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a email notification</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c2 img-cir img-40">
-                                                    <i class="zmdi zmdi-account-box"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>Your account has been blocked</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c3 img-cir img-40">
-                                                    <i class="zmdi zmdi-file-text"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>You got a new file</p>
-                                                    <span class="date">April 12, 2018 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__footer">
-                                                <a href="#">All notifications</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
+                                        @if (Auth::user()->image==null)
+                                        @if (Auth::user()->gender == 'male')
+                                                        <div class="image">
+                                                            <a href="#">
+                                                                <img src="{{asset('image/default_image_male.png')}}" alt="{{Auth::user()->name}}" />
+                                                            </a>
+                                                        </div>
+                                                        @else
+                                                        <div class="image">
+                                                            <a href="#">
+                                                                <img src="{{asset('image/default_image_female.png')}}" alt="{{Auth::user()->name}}" />
+                                                            </a>
+                                                        </div>
+                                                    @endif
+                                        @else
                                         <div class="image">
-                                            <img src="{{asset('admin/images/icon/avatar-01.jpg ')}}" alt="John Doe" />
+                                            <img src="{{asset('storage/'.Auth::user()->image)}}" alt="{{Auth::user()->name}}" />
                                         </div>
+                                        @endif
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">{{Auth::user()->name}}</a>
+                                            <a class="js-acc-btn text-decoration-none" href="#">{{Auth::user()->name}}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
+                                                @if (Auth::user()->image == null)
+                                                    @if (Auth::user()->gender == 'male')
+                                                        <div class="image">
+                                                            <a href="#" >
+                                                                <img src="{{asset('image/default_image_male.png')}}" alt="{{Auth::user()->name}}" />
+                                                            </a>
+                                                        </div>
+                                                        @else
+                                                        <div class="image">
+                                                            <a href="#">
+                                                                <img src="{{asset('image/default_image_female.png')}}" alt="{{Auth::user()->name}}" />
+                                                            </a>
+                                                        </div>
+                                                    @endif
+                                                @else
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{asset('admin/images/icon/avatar-01.jpg ')}}" alt="John Doe" />
+                                                        <img src="{{asset('storage/'.Auth::user()->image)}}" alt="{{Auth::user()->name}}" />
                                                     </a>
                                                 </div>
+                                                @endif
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">{{Auth::user()->name}}</a>
+                                                        <a href="#" class="text-decoration-none">{{Auth::user()->name}}</a>
                                                     </h5>
                                                     <span class="email">{{Auth::user()->email}}</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="{{route('admin#details')}}" class="text-decoration-none">
                                                         <i class="fa fa-user"></i>Account</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="{{route('admin#changePasswordPage')}}">
+                                                    <a href="{{route('admin#list')}}" class="text-decoration-none">
+                                                        <i class="fa-solid fa-users"></i>Admin Group</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{route('admin#changePasswordPage')}}" class="text-decoration-none">
                                                         <i class="fa fa-key"></i>Change Password</a>
                                                 </div>
                                             </div>
@@ -181,14 +184,17 @@
 
         <div class="page-container">
             @yield('content')
+
         </div>
+
     </div>
 
     <!-- Jquery JS-->
-    <script src="{{asset('admin/vendor/jquery-3.2.1.min.js')}}"></script>
+    {{-- <script src="{{asset('admin/vendor/jquery-3.2.1.min.js')}}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Bootstrap JS-->
-    <script src="{{asset('admin/vendor/bootstrap-4.1/popper.min.js')}}"></script>
-    <script src="{{asset('admin/vendor/bootstrap-4.1/bootstrap.min.js')}}"></script>
+    {{-- <script src="{{asset('admin/vendor/bootstrap-4.1/popper.min.js')}}"></script> --}}
+    {{-- <script src="{{asset('admin/vendor/bootstrap-4.1/bootstrap.min.js')}}"></script> --}}
     <!-- Vendor JS       -->
     <script src="{{asset('admin/vendor/slick/slick.min.js')}}">
     </script>
@@ -204,11 +210,13 @@
     <script src="{{asset('admin/vendor/chartjs/Chart.bundle.min.js')}}"></script>
     <script src="{{asset('admin/vendor/select2/select2.min.js')}}">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <!-- Main JS-->
     <script src="{{asset('admin/js/main.js')}}"></script>
 
 </body>
+@yield('scriptSection')
 
 </html>
 <!-- end document-->

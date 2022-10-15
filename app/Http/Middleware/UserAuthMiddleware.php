@@ -11,17 +11,18 @@ class UserAuthMiddleware
 
     public function handle(Request $request, Closure $next)
     {
-        // if( !empty(Auth::user())){
+        if( !empty(Auth::user())){
 
-        //     if(url()->current() == route('auth#loginPage') || url()->current() == route('auth#registerPage')) {
-        //         return back();
-        //     }
+            if(url()->current() == route('auth#loginPage') || url()->current() == route('auth#registerPage')) {
+                return back();
+            }
 
-        // }
-        // dd(Auth::user()->role);
-        if(Auth::user()->role == 'admin') {
-            return back();
+            if(Auth::user()->role == 'admin') {
+                return back();
+            }
+            return $next($request);
         }
+    return $next($request);
         return $next($request);
     }
 
